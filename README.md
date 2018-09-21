@@ -1,3 +1,5 @@
+This walkthrough is based on this [sample tutorial](https://github.com/GoogleCloudPlatform/community/tree/master/tutorials/managing-gcp-projects-with-terraform) with my own modifications.
+
 Assuming that the `${USER}` resolves to `auser`.
 
 ```bash
@@ -191,4 +193,12 @@ ip = xx.xxxx.yyy.zz
 project_id = tf-nestedvirt3
 ```
 
-TBD - instructions to fire up a guest OS inside your new VM with QEMU.
+SSH into your new VM instance. And do the following:
+
+```bash
+vm1$ sudo bash -c "echo '0 128' > /proc/sys/net/ipv4/ping_group_range"
+
+vm1$ wget https://people.debian.org/~aurel32/qemu/i386/debian_wheezy_i386_standard.qcow2
+
+vm1$ sudo qemu-system-i386 -enable-kvm -hda debian_wheezy_i386_standard.qcow2 -net nic -net user -curses
+```
