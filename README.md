@@ -1,4 +1,4 @@
-This walkthrough is based on this [sample tutorial](https://github.com/GoogleCloudPlatform/community/tree/master/tutorials/managing-gcp-projects-with-terraform) with my own modifications.
+This walkthrough is based on this [sample tutorial](https://cloud.google.com/compute/docs/instances/enable-nested-virtualization-vm-instances) ([code](https://github.com/GoogleCloudPlatform/community/tree/master/tutorials/managing-gcp-projects-with-terraform)) with my own modifications.
 
 Assuming that the `${USER}` resolves to `auser`.
 
@@ -8,6 +8,14 @@ And you might want to edit `project.tf` and change the project name to one of yo
 currently set to `tf-nestedvirt3`.
 
 ```bash
+$ cat activate
+export TF_VAR_org_id=111111111111
+export TF_VAR_billing_account=000000-000000-000000
+export TF_ADMIN=${USER}-admin1
+export TF_CREDS=~/.gcloud/${USER}-admin1.json
+export GOOGLE_APPLICATION_CREDENTIALS=${TF_CREDS}
+export GOOGLE_PROJECT=${TF_ADMIN}
+
 $ source ./activate
 
 $ echo $TF_ADMIN
