@@ -176,7 +176,11 @@ Created [https://www.googleapis.com/compute/v1/projects/tf-nestedvirt3/global/im
 NAME              PROJECT         FAMILY    DEPRECATED  STATUS
 nested-v20180919  tf-nestedvirt3  debian-9              READY
 
-(tf-nestedvirt3)$ gcloud compute images list --format=json --filter="family:debian-9"
+(tf-nestedvirt3)$ gcloud compute images list --format='table(name,licenses)' --filter="family:debian-9"
+NAME                        LICENSES
+debian-9-stretch-v20180911  [u'https://www.googleapis.com/compute/v1/projects/debian-cloud/global/licenses/debian-9-stretch']
+nested-v20180919            [u'https://www.googleapis.com/compute/v1/projects/vm-options/global/licenses/enable-vmx', 
+                             u'https://www.googleapis.com/compute/v1/projects/debian-cloud/global/licenses/debian-9-stretch']
 ```
 
 Now move back `vm.tf` to your terraform directory.
@@ -195,12 +199,26 @@ ip = xx.xxxx.yyy.zz
 project_id = tf-nestedvirt3
 ```
 
-SSH into your new VM instance. And do the following:
+Verify that the L1 VM is configured with VT-X.
+
+![vtx configured](assets/kvm-p3-withVTx.png)
+
+The second thing is to allow the nested VM (L2 VM) to ping. This step is required as we are using [QEMU user networking](https://wiki.qemu.org/Documentation/Networking)
 
 ```bash
 vm1$ sudo bash -c "echo '0 128' > /proc/sys/net/ipv4/ping_group_range"
+```
 
+Now we are ready to fire up our nested VM. 
+
+```bash
 vm1$ wget https://people.debian.org/~aurel32/qemu/i386/debian_wheezy_i386_standard.qcow2
 
 vm1$ sudo qemu-system-i386 -enable-kvm -hda debian_wheezy_i386_standard.qcow2 -net nic -net user -curses
 ```
+
+When the nested VM's login prompt appears, log in with user `root` & password `root`.
+
+![vtx configured](assets/kvm-p4.png.png)
+
+
