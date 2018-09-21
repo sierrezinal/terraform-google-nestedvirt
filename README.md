@@ -141,3 +141,54 @@ $ TF_LOG=yes terraform init
 ..
 Terraform has been successfully initialized!
 ```
+
+Before you continue, please move `vm.tf` to be outside of the directory that contains all the `*.tf` files.
+And you might want to edit `project.tf` and change the project name to one of your own liking. It is
+currently set to `tf-nestedvirt3`.
+
+And once that is ready, run the following:
+
+```bash
+$ terraform apply
+```
+
+At this point, you have a new project. You need to switch to it.
+
+```bash
+$ gcloud config set project tf-nestedvirt3
+```
+
+Next we create a new image with the virtualization license activated.
+
+```bash
+(tf-nestedvirt3)$ export SOURCE_PROJECT=debian-cloud
+(tf-nestedvirt3)$ export SOURCE_FAMILY=debian-9
+
+(tf-nestedvirt3)$ gcloud compute images create nested-v20180919 --family debian-9 
+   --source-image-project $SOURCE_PROJECT  
+   --source-image-family $SOURCE_FAMILY 
+   --licenses=https://www.googleapis.com/compute/v1/projects/vm-options/global/licenses/enable-vmx
+Created [https://www.googleapis.com/compute/v1/projects/tf-nestedvirt3/global/images/nested-v20180919].
+NAME              PROJECT         FAMILY    DEPRECATED  STATUS
+nested-v20180919  tf-nestedvirt3  debian-9              READY
+
+(tf-nestedvirt3)$ gcloud compute images list --format=json --filter="family:debian-9"
+```
+
+Now move back `vm.tf` to your terraform directory.
+
+```bash
+$ terraform apply
+
+google_compute_instance.vm: Still creating... (10s elapsed)
+google_compute_instance.vm: Creation complete after 15s (ID: vm1)
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+ip = xx.xxxx.yyy.zz
+project_id = tf-nestedvirt3
+```
+
+TBD - instructions to fire up a guest OS inside your new VM with QEMU.
