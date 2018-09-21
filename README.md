@@ -199,7 +199,7 @@ ip = xx.xxxx.yyy.zz
 project_id = tf-nestedvirt3
 ```
 
-Verify that the L1 VM is configured with VT-X.
+Verify that the L1 VM is configured with VT-x.
 
 ![vtx configured](assets/kvm-p3-withVTx.png)
 
