@@ -29,7 +29,7 @@ ACCOUNT_ID            NAME                       OPEN  MASTER_ACCOUNT_ID
 000000-FFFFFF-EEEEEE  Mon compte de facturation  True
 ```
 
-Next we create a admin project for use by terraform.
+Next we create an parent project for use by terraform.
 
 ```bash
 $ gcloud iam service-accounts create terraform \
@@ -219,6 +219,4 @@ vm1$ sudo qemu-system-i386 -enable-kvm -hda debian_wheezy_i386_standard.qcow2 -n
 
 When the nested VM's login prompt appears, log in with user `root` & password `root`.
 
-![vtx configured](assets/kvm-p4.png.png)
-
-
+![vtx configured](assets/kvm-p4.png)
