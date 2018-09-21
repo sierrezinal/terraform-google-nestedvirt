@@ -2,6 +2,11 @@ This walkthrough is based on this [sample tutorial](https://github.com/GoogleClo
 
 Assuming that the `${USER}` resolves to `auser`.
 
+* Customize `variables.tf` for your environment.
+* Before you continue, please move `vm.tf` to be outside of the directory that contains all the `*.tf` files.
+And you might want to edit `project.tf` and change the project name to one of your own liking. It is
+currently set to `tf-nestedvirt3`.
+
 ```bash
 $ source ./activate
 
@@ -144,9 +149,6 @@ $ TF_LOG=yes terraform init
 Terraform has been successfully initialized!
 ```
 
-Before you continue, please move `vm.tf` to be outside of the directory that contains all the `*.tf` files.
-And you might want to edit `project.tf` and change the project name to one of your own liking. It is
-currently set to `tf-nestedvirt3`.
 
 And once that is ready, run the following:
 
