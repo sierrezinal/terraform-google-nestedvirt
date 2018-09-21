@@ -5,7 +5,7 @@ Assuming that the `${USER}` resolves to `auser`.
 * Customize `variables.tf` for your environment.
 * Before you continue, please move `vm.tf` to be outside of the directory that contains all the `*.tf` files.
 And you might want to edit `project.tf` and change the project name to one of your own liking. It is
-currently set to `tf-nestedvirt3`.
+currently set to `tf-nestedvirt3` in `project.tf`.
 
 ```bash
 $ cat activate
@@ -164,7 +164,7 @@ And once that is ready, run the following:
 $ terraform apply
 ```
 
-At this point, you have a new project. You need to switch to it.
+At this point, you have a new project. You may need to switch to it.
 
 ```bash
 $ gcloud config set project tf-nestedvirt3
