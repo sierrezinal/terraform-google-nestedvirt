@@ -37,7 +37,7 @@ ACCOUNT_ID            NAME                       OPEN  MASTER_ACCOUNT_ID
 000000-FFFFFF-EEEEEE  Mon compte de facturation  True
 ```
 
-Next we create an parent project for use by terraform.
+Next we create a parent project for use by terraform.
 
 ```bash
 $ gcloud iam service-accounts create terraform \
