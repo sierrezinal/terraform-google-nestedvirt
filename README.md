@@ -194,7 +194,7 @@ nested-v20180919            [u'https://www.googleapis.com/compute/v1/projects/vm
 Now move back `vm.tf` to your terraform directory.
 
 ```bash
-$ terraform apply
+(tf-nestedvirt3)$ terraform apply
 
 google_compute_instance.vm: Still creating... (10s elapsed)
 google_compute_instance.vm: Creation complete after 15s (ID: vm1)
@@ -212,6 +212,7 @@ Verify that the L1 VM is configured with VT-x.
 ![vtx configured](assets/kvm-p3-withVTx.png)
 
 The second thing is to allow the nested VM (L2 VM) to ping. This step is required as we are using [QEMU user networking](https://wiki.qemu.org/Documentation/Networking)
+SSH into your new VM.
 
 ```bash
 vm1$ sudo bash -c "echo '0 128' > /proc/sys/net/ipv4/ping_group_range"
@@ -228,3 +229,6 @@ vm1$ sudo qemu-system-i386 -enable-kvm -hda debian_wheezy_i386_standard.qcow2 -n
 When the nested VM's login prompt appears, log in with user `root` & password `root`.
 
 ![vtx configured](assets/kvm-p4.png)
+
+To exit, press ESC + 2 together, then enter `quit` at the QEMU prompt.
+¶
